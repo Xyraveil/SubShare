@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "198884056048",
+    "project_id": "subshare-xyraveil",
+    "storage_bucket": "subshare-xyraveil.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198884056048:android:910afafe03bdaaba871b35",
+        "android_client_info": {
+          "package_name": "com.xyraveil.subshare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVQnH4EtfNfE0OYQ64o3OTDidDELpVo8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

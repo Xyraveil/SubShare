@@ -1,0 +1,23 @@
+/build
+# Gradle
+.gradle/
+
+# Local machine specific
+local.properties
+
+# Build outputs
+**/build/
+
+# Native build
+.externalNativeBuild/
+.cxx/
+app/google-services.json
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IntelliJ module files
+*.iml
