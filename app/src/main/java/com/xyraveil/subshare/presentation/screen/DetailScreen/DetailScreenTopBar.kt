@@ -9,6 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -66,7 +67,7 @@ fun DetailScreenTopBar(recipe: Recipe, navController: NavController) {
             Icon(
 
                 painter = painterResource(if (isFavourite) R.drawable.heartfilled else R.drawable.heartoutline  ),
-                tint = Color.Black,
+                tint = MaterialTheme.colorScheme.onBackground ,
                 contentDescription = "Add to Favorite",
                 modifier = Modifier
                     .padding(end = 12.dp)

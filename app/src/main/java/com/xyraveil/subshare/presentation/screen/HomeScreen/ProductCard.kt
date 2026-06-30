@@ -77,19 +77,18 @@ fun productCard(recipe: Recipe,
                         .clip(RoundedCornerShape(16.dp))
                 )
             }
-                Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(2.dp))
+            Text(
+                text = recipe.title,
+                style = typography.titleLarge,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.Black,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+
+            )
             Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.SpaceBetween) {
                 Column {
-                    Text(
-                        text = recipe.title,
-                        style = typography.titleLarge,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.Black,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "By "+recipe.creatorUsername,
                         style = typography.bodySmall,
@@ -104,7 +103,6 @@ fun productCard(recipe: Recipe,
                     .size(24.dp)
                     .background(color = Color.White,shape = RoundedCornerShape(12.dp))
                     ,
-
                     contentAlignment = Alignment.Center) {
                     Box(
                         modifier = Modifier

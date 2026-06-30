@@ -4,15 +4,18 @@ package com.xyraveil.subshare.presentation.screen.ProfileScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -54,7 +57,11 @@ fun MyRecipeCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 6.dp)
-            .border(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f), width = 2.dp, shape = RoundedCornerShape(12.dp))
+            .border(
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+                width = 2.dp,
+                shape = RoundedCornerShape(12.dp)
+            )
             .clickable(onClick = { navController.navigate(Routes.DetailScreen(recipe.recipeId)) }),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.background,
@@ -71,10 +78,16 @@ fun MyRecipeCard(
             verticalAlignment = Alignment.CenterVertically
         )
         {
-            Box(modifier = Modifier
-                .clip(shape = RoundedCornerShape(12.dp))
-                .size(100.dp)
-                .border(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.4f), width = 2.dp, shape = RoundedCornerShape(12.dp))){
+            Box(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(12.dp))
+                    .size(100.dp)
+                    .border(
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.4f),
+                        width = 2.dp,
+                        shape = RoundedCornerShape(12.dp)
+                    )
+            ) {
 
                 AsyncImage(
                     model = recipe.imageUrl,
@@ -84,65 +97,104 @@ fun MyRecipeCard(
                 )
             }
 
-            Column(modifier = Modifier.padding(horizontal = 16.dp).width(150.dp)) {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .width(150.dp)
+            ) {
                 Text(
                     text = recipe.title,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface,
-                    maxLines = 2,
+                    maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-                Text(text = recipe.notes, fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground,
+                Text(
+                    text = recipe.notes,
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
-                    )
-                Text(text = "By " +recipe.creatorUsername, fontSize = 14.sp, color = MaterialTheme.colorScheme.primary,
+                )
+                Text(
+                    text = "By " + recipe.creatorUsername,
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.SemiBold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
             }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            )
-            {
+            Spacer(Modifier.weight(1f))
+            Column(
+                modifier = Modifier.fillMaxHeight(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                val color = if (recipe.veg) lerp(
+                    MaterialTheme.colorScheme.primary,
+                    Color.Yellow,
+                    0.5f
+                ) else lerp(Color.Red, Color.Black, 0.2f)
+                Box(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .background(color = Color.White, shape = RoundedCornerShape(12.dp)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(24.dp)
+                            .border(
+                                width = 2.dp,
+                                color = color,
+                                shape = RoundedCornerShape(6.dp)
+                            )
+                            .padding(3.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(11.dp)
+                                .background(color, CircleShape)
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(12.dp))
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = "Delete",
                     tint = lerp(Color.Red, Color.Black, 0.2f),
                     modifier = Modifier
-                        .padding(end = 12.dp)
                         .size(36.dp)
-                        .clickable(onClick = {eliminateRecipe  = true})
+                        .clickable(onClick = { eliminateRecipe = true })
                 )
             }
-
-
-
         }
-        AppMessageDialogBox(
-            show = eliminateRecipe ,
-            title = "Delete Blueprint?",
-            message =  "Are you sure you want to permanently delete this Bluprint? ",
-            onDismiss = {
-                eliminateRecipe = false
-            },
-            confirmandDismiss = true,
-            onConfirm = {
-                RecipeRepository.deleteRecipe(
-                    recipeId = recipe.recipeId,
-                    onSuccess = {
-                        onDelete(recipe)
-                    },
-                    onFailure = {
-                        // Handle error
-                    }
-                )
-                eliminateRecipe = false
-            }
-        )
+
+
     }
+    AppMessageDialogBox(
+        show = eliminateRecipe,
+        title = "Delete Blueprint?",
+        message = "Are you sure you want to permanently delete this Bluprint? ",
+        onDismiss = {
+            eliminateRecipe = false
+        },
+        confirmandDismiss = true,
+        onConfirm = {
+            RecipeRepository.deleteRecipe(
+                recipeId = recipe.recipeId,
+                onSuccess = {
+                    onDelete(recipe)
+                },
+                onFailure = {
+                    // Handle error
+                }
+            )
+            eliminateRecipe = false
+        }
+    )
+
 }
