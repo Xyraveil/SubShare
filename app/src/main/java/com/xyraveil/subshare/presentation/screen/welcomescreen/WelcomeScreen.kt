@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -38,7 +37,7 @@ fun WelcomeScreen(navController: NavController)
 {
     Box( modifier = Modifier
         .fillMaxSize()
-        .background(color = MaterialTheme.colorScheme.primary))
+        .background(color = MaterialTheme.colorScheme.background))
     {
         Image(painter = painterResource(id = R.drawable.subwaysandwiches),contentDescription = "Welcome Image", contentScale = ContentScale.Crop)
         Column(modifier = Modifier
@@ -47,11 +46,11 @@ fun WelcomeScreen(navController: NavController)
         {
             Spacer(modifier = Modifier.height(130.dp))
             Text(text = "Every \nSub Has\na Story.",
-                color =  Color.White,
+                color =  MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.ExtraBold,
                 style = TextStyle(
                     shadow = Shadow(
-                        color = Color.Black.copy(alpha = 0.5f),
+                        color = MaterialTheme.colorScheme.background.copy(alpha = 0.5f),
                         offset = Offset(3f, 3f),
                         blurRadius = 8f
                     )
@@ -68,7 +67,7 @@ fun WelcomeScreen(navController: NavController)
             {
                 Text(
                     text = "Browse thousands of community-made Subway combinations or create and share your signature order",
-                    color = Color.LightGray,
+                    color = MaterialTheme.colorScheme.onSurface ,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center
@@ -80,8 +79,7 @@ fun WelcomeScreen(navController: NavController)
                         .fillMaxWidth()
                         .height(50.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
-                        contentColor = Color.White
+                        containerColor = MaterialTheme.colorScheme.primary,
                     ),
                     shape = RoundedCornerShape(10.dp)
                 ) {
@@ -89,7 +87,7 @@ fun WelcomeScreen(navController: NavController)
                         text = "Sign in",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black
+                        color = MaterialTheme.colorScheme.onBackground
                     )
 
                 }
@@ -100,8 +98,7 @@ fun WelcomeScreen(navController: NavController)
                         .fillMaxWidth()
                         .height(50.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
-                        contentColor = Color.White
+                        containerColor = MaterialTheme.colorScheme.primary,
                     ),
                     shape = RoundedCornerShape(10.dp)
                 ) {
@@ -109,7 +106,7 @@ fun WelcomeScreen(navController: NavController)
                         text = "Register",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black
+                        color = MaterialTheme.colorScheme.onBackground
                     )
 
                 }

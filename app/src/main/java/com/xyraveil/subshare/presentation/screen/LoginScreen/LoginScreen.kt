@@ -59,7 +59,8 @@ fun LoginScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.White)
+            .background(
+                color = MaterialTheme.colorScheme.background)
 
     )
     {
@@ -83,7 +84,7 @@ fun LoginScreen(navController: NavController) {
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 fontSize = 36.sp,
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(80.dp))
@@ -173,14 +174,14 @@ fun LoginScreen(navController: NavController) {
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = "Join now",
                     style = MaterialTheme.typography.titleLarge.copy(textDecoration = TextDecoration.Underline),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp,
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.clickable(onClick = {navController.navigate(Routes.RegisterScreen) })
                 )
             }
